@@ -1,0 +1,28 @@
+{
+  "name": "DiscordTS",
+  "version": "1.0.0",
+  "main": "dist/Main.js",
+  "repository": "https://github.com/Izzxt/DiscordTS.git",
+  "author": "Izzat",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "node dist/Main.js",
+    "start:build": "tsc",
+    "start:dev": "ts-node-dev --respawn --transpile-only --poll src/Main.ts"
+  },
+  "dependencies": {
+    "@discordjs/builders": "^0.5.0",
+    "@discordjs/rest": "^0.1.0-canary.0",
+    "discord-api-types": "^0.22.0",
+    "discord.js": "^13.1.0-dev.1628640678.0266f28",
+    "dotenv": "^10.0.0",
+    "fs": "^0.0.1-security"
+  },
+  "devDependencies": {
+    "@types/node": "^16.4.13",
+    "ts-node": "^10.2.0",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.3.5"
+  }
+}
