@@ -1,5 +1,5 @@
 {
-  "name": "DiscordTS",
+  "name": "discord-ts-handler",
   "version": "1.0.0",
   "main": "dist/Main.js",
   "repository": "https://github.com/Izzxt/DiscordTS.git",

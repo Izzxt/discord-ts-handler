@@ -1,17 +1,21 @@
 import { Bot } from "../../Client"
 import { readdirSync } from "fs";
-import path from "path/posix";
+import path from "path";
 
 export class CommandHandler {
 
     public async load(bot: Bot) {
-        const command = readdirSync('./src/Commands').filter(file => file.endsWith('.ts'))
+        const command = readdirSync('./src/Commands')
 
-        for (const file of command) {
-            const Command: any = await require(path.join(__dirname, '../../../', `Commands/${file}`)).default
+        command.forEach(async file => {
+            const Command: any = await require(path.join(__dirname, '../../', `Commands/${file.replace('ts', 'js')}`)).default
             const cmd = new Command()
             bot.command.set(cmd.cmdOpt.data.name, cmd)
             bot.commands.push(cmd.cmdOpt.data)
+        })
+
+        for (const file of command) {
+
         }
     }
 }

@@ -28,7 +28,15 @@
    GUILDID=your guild id
    CLIENTID=your client id
    ```
-
+5. Step to run the bot
+* Build
+   ```sh
+   yarn start:build
+   ```
+* Start
+   ```sh
+   yarn start
+   ```
 <!-- USAGE EXAMPLES -->
 ## Usage
 
