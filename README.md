@@ -28,7 +28,9 @@
    GUILDID=your guild id
    CLIENTID=your client id
    ```
-5. Step to run the bot
+<!-- USAGE EXAMPLES -->
+## Usage
+
 * Build
    ```sh
    yarn start:build
@@ -37,8 +39,6 @@
    ```sh
    yarn start
    ```
-<!-- USAGE EXAMPLES -->
-## Usage
 
 _For examples to register commands, please refer to the `src/commands` folder._
 
