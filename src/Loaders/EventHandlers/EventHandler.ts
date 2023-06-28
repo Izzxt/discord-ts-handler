@@ -14,7 +14,7 @@ export class EventHandler {
         const event = readdirSync('./src/Events')
 
         event.forEach(async file => {
-            const Event = await require(path.join(__dirname, '../../', `Events/${file.replace('ts', 'js')}`)).default
+            const Event = await require(path.join(__dirname, '../../', `Events/${file}`)).default
             const ev = new Event()
             this._bot.on(ev._name.name, ev.run.bind(null, this._bot))
         })

@@ -1,7 +1,7 @@
-import { Client, Collection, Intents } from "discord.js";
+import { Client, Collection, GatewayIntentBits } from "discord.js";
 import { Command } from "./Loaders/Command";
 import { CommandHandler } from "./Loaders/CommandHandler/CommandHandler";
-import { IClient, IEvent} from "./Types";
+import { IClient, IEvent } from "./Types";
 
 export class Bot extends Client implements IClient {
     public commandHandler: CommandHandler
@@ -10,7 +10,7 @@ export class Bot extends Client implements IClient {
     public commands: any[] = []
 
     public constructor() {
-        super({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+        super({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
 
         this.command = new Collection()
         this.event = new Collection()

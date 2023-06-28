@@ -8,7 +8,7 @@ export class CommandHandler {
         const command = readdirSync('./src/Commands')
 
         command.forEach(async file => {
-            const Command: any = await require(path.join(__dirname, '../../', `Commands/${file.replace('ts', 'js')}`)).default
+            const Command: any = await require(path.join(__dirname, '../../', `Commands/${file}`)).default
             const cmd = new Command()
             bot.command.set(cmd.cmdOpt.data.name, cmd)
             bot.commands.push(cmd.cmdOpt.data)
