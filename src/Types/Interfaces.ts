@@ -1,14 +1,17 @@
+import { Bot } from "src/Client";
 import { CommandHandler } from "../Loaders/CommandHandler/CommandHandler";
-import { ClientEvents } from "discord.js";
+import { ButtonInteraction, CacheType, ClientEvents, CommandInteraction, InteractionResponse, Message, SlashCommandBuilder } from "discord.js";
 
 export interface IClient {
-    commandHandler: CommandHandler
+    commandHandler: CommandHandler;
 }
 
 export interface IEvent {
-    name: keyof ClientEvents
+    name: keyof ClientEvents;
 }
 
 export interface ICommand {
-    data: {}
+    data: any;
+    buttonIds?: string[] | undefined;
+    reactions?: string[] | undefined;
 }

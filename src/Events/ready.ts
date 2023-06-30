@@ -1,6 +1,8 @@
 import { Event } from "../Loaders/event";
 import { Bot } from "../Client";
 import { GUILDID } from "../Config";
+import { logger } from "../Utils/logger";
+
 export default class Ready extends Event {
 
     constructor() {
@@ -8,11 +10,11 @@ export default class Ready extends Event {
     }
 
     public async run(bot: Bot): Promise<void> {
-        console.log(`Logged in as ${bot.user?.tag}`)
+        logger.info(`Logged in as ${bot.user?.tag}`)
 
         const cmd = await bot.guilds.cache.get(GUILDID)?.commands.set(bot.commands)
 
-        if (cmd) return console.log("Successfully registered application (/) commands.")
+        if (cmd) return logger.info("Successfully registered application (/) commands.")
     }
 
 }

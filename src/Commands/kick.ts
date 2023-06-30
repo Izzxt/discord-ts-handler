@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { CacheType, CommandInteraction, InteractionResponse, Permissions, PermissionsBitField } from "discord.js";
+import { CommandInteraction, InteractionResponse, PermissionsBitField } from "discord.js";
 import { Bot } from "../Client";
 import { Command } from "../Loaders/Command";
 
