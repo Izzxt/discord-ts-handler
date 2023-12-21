@@ -1,9 +1,9 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, InteractionResponse, PermissionsBitField } from "discord.js";
-import { Bot } from "../Client";
-import { Command } from "../Loaders/Command";
+import { Bot } from "../client";
+import { Interaction } from "../loaders/interaction";
 
-export default class Kick extends Command {
+export default class Kick extends Interaction {
     constructor() {
         super({
             data: new SlashCommandBuilder()
@@ -13,7 +13,7 @@ export default class Kick extends Command {
                 .addStringOption((option) => option.setName("reason").setDescription("Reason to kick the user")),
         });
     }
-    public async run(bot: Bot, interaction: CommandInteraction, ...args: any[]): Promise<InteractionResponse<boolean> | undefined> {
+    public async executeCommandInteraction(bot: Bot, interaction: CommandInteraction, ...args: any[]): Promise<InteractionResponse<boolean> | undefined> {
         const user = interaction.options.getUser("user");
         const reason = interaction.options.get("reason");
         const perm = interaction.member?.permissions as Readonly<PermissionsBitField>;

@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node dist/Main.js",
     "start:build": "tsc ",
-    "start:dev": "ts-node-dev --respawn --transpile-only --poll src/Main.ts"
+    "start:dev": "ts-node-dev --respawn --transpile-only --poll src/main.ts"
   },
   "dependencies": {
     "@discordjs/builders": "^0.5.0",
@@ -17,9 +17,10 @@
     "@prisma/client": "4.16.1",
     "chalk": "^4.1.2",
     "discord-api-types": "^0.22.0",
-    "discord.js": "^14.11.0",
+    "discord.js": "14.14.0",
     "dotenv": "^10.0.0",
     "fs": "^0.0.1-security",
+    "glob": "^10.3.10",
     "pino": "^8.14.1",
     "pino-pretty": "^10.0.0"
   },
