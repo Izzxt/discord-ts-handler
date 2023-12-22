@@ -1,5 +1,4 @@
-import { SlashCommandBuilder } from "@discordjs/builders";
-import { CommandInteraction, InteractionResponse, PermissionsBitField } from "discord.js";
+import { CommandInteraction, InteractionResponse, PermissionsBitField, SlashCommandBuilder } from "discord.js";
 import { Bot } from "../client";
 import { Interaction } from "../loaders/interaction";
 

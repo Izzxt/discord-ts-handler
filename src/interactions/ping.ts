@@ -1,4 +1,3 @@
-import { SlashCommandBuilder } from "@discordjs/builders";
 import {
     ActionRowBuilder,
     AnyComponentBuilder,
@@ -13,6 +12,7 @@ import {
     ModalBuilder,
     ModalSubmitInteraction,
     PermissionsBitField,
+    SlashCommandBuilder,
     StringSelectMenuBuilder,
     StringSelectMenuOptionBuilder,
     TextInputBuilder,
