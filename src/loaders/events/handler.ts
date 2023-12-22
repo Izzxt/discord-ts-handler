@@ -1,22 +1,21 @@
-import { Bot } from "../../client";
 import { Client } from "discord.js";
-import { readdirSync } from "fs";
-import path from "path";
+import { glob } from "glob";
+import { Bot } from "../../client";
 
 export class EventHandler {
-    public _bot: Client
+    public _bot: Client;
 
     constructor(bot: Bot) {
-        this._bot = bot
+        this._bot = bot;
     }
 
     public async init() {
-        const event = readdirSync('./src/events')
+        const events = glob.sync("./src/events/**/*{.ts,.js}");
 
-        event.forEach(async file => {
-            const Event = await require(path.join(__dirname, '../../', `events/${file}`)).default
-            const ev = new Event()
-            this._bot.on(ev._name.name, ev.execute.bind(null, this._bot))
-        })
+        for (const file of events) {
+            const Event = await require(file).default;
+            const ev = new Event();
+            this._bot.on(ev._name.name, ev.execute.bind(null, this._bot));
+        }
     }
 }

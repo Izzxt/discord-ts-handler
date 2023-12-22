@@ -1,8 +1,6 @@
-import { Bot } from "../../client";
-import { readdirSync } from "fs";
-import path from "path";
-import { Interaction } from "../interaction";
 import { glob } from "glob";
+import { Bot } from "../../client";
+import { Interaction } from "../interaction";
 
 export class InteractionHandler {
     public async load(bot: Bot) {
@@ -19,9 +17,21 @@ export class InteractionHandler {
                 }
             }
 
-            if (interaction.interactionOpt.reactions !== undefined) {
-                for (const reaction of interaction.interactionOpt.reactions) {
+            if (interaction.interactionOpt.menuIds !== undefined) {
+                for (const menuName of interaction.interactionOpt.menuIds) {
+                    bot.menus.set(menuName, interaction);
+                }
+            }
+
+            if (interaction.interactionOpt.reactionIds !== undefined) {
+                for (const reaction of interaction.interactionOpt.reactionIds) {
                     bot.reactions.set(reaction, interaction);
+                }
+            }
+
+            if (interaction.interactionOpt.modalIds !== undefined) {
+                for (const reaction of interaction.interactionOpt.modalIds) {
+                    bot.modals.set(reaction, interaction);
                 }
             }
 

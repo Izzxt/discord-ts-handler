@@ -12,6 +12,7 @@ export interface IEvent {
 export interface InteractionOptions {
     data: any;
     buttonIds?: string[] | undefined;
-    reactions?: string[] | undefined;
-    contextName?: string;
+    reactionIds?: string[] | undefined;
+    menuIds?: string[] | undefined;
+    modalIds?: string[] | undefined;
 }

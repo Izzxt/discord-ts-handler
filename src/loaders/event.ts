@@ -1,6 +1,6 @@
+import { Client } from "discord.js";
 import { Response } from "src/types/types";
 import { IEvent } from "../types";
-import { Client, InteractionResponse } from "discord.js";
 
 export abstract class Event {
     public _name: IEvent;
