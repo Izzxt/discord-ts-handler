@@ -9,7 +9,6 @@ export class InteractionHandler {
         for (const file of interactions) {
             const Interaction: any = await require(file).default;
             const interaction: Interaction = new Interaction();
-            bot.interaction.set(interaction.interactionOpt.data.name, interaction);
 
             if (interaction.interactionOpt.buttonIds !== undefined) {
                 for (const buttonId of interaction.interactionOpt.buttonIds) {
@@ -35,6 +34,8 @@ export class InteractionHandler {
                 }
             }
 
+            if (interaction.interactionOpt.data === undefined) continue;
+            bot.interaction.set(interaction.interactionOpt.data.name, interaction);
             bot.interactions.push(interaction.interactionOpt.data);
         }
     }
