@@ -20,7 +20,7 @@ export default class InteractionButton extends Event {
         try {
           await cmd.executeButtonInteraction?.(bot, interaction, interaction.customId);
         } catch (error) {
-          if (error instanceof Error) logger.error(error.message);
+          if (error instanceof Error) logger.error(error);
         }
       }
     }

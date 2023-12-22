@@ -28,7 +28,7 @@ export default class InteractionCreate extends Event {
       try {
         await cmd.executeCommandInteraction?.(bot, interaction, ...args);
       } catch (error) {
-        if (error instanceof Error) logger.error(error.message);
+        if (error instanceof Error) logger.error(error);
       }
     }
   }

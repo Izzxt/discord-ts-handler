@@ -20,7 +20,7 @@ export default class InteractionSelectMenu extends Event {
         try {
           await cmd.executeSelectMenuInteraction?.(bot, interaction, interaction.customId);
         } catch (error) {
-          if (error instanceof Error) logger.error(error.message);
+          if (error instanceof Error) logger.error(error);
         }
       }
     }

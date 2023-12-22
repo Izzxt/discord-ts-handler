@@ -20,7 +20,7 @@ export default class InteractionModal extends Event {
         try {
           await cmd.executeModalInteraction?.(bot, interaction, interaction.customId);
         } catch (error) {
-          if (error instanceof Error) logger.error(error.message);
+          if (error instanceof Error) logger.error(error);
         }
       }
     }
