@@ -18,7 +18,7 @@ export default class InteractionButton extends Event {
 
       if (cmd.interactionOpt.buttonIds.includes(interaction.customId)) {
         try {
-          cmd.executeButtonInteraction?.(bot, interaction, interaction.customId);
+          await cmd.executeButtonInteraction?.(bot, interaction, interaction.customId);
         } catch (error) {
           if (error instanceof Error) logger.error(error.message);
         }
