@@ -1,4 +1,4 @@
-import { ClientEvents } from "discord.js";
+import { ClientEvents, SlashCommandAttachmentOption, SlashCommandBuilder, SlashCommandOptionsOnlyBuilder, SlashCommandStringOption, SlashCommandSubcommandBuilder, SlashCommandSubcommandGroupBuilder, SlashCommandSubcommandsOnlyBuilder } from "discord.js";
 import { InteractionHandler } from "../loaders/interactions/handler";
 
 export interface IClient {
@@ -10,7 +10,7 @@ export interface IEvent {
 }
 
 export interface InteractionOptions {
-    data: any;
+    data?: SlashCommandBuilder | SlashCommandSubcommandsOnlyBuilder | SlashCommandSubcommandGroupBuilder | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup"> | undefined;
     buttonIds?: string[] | undefined;
     reactionIds?: string[] | undefined;
     menuIds?: string[] | undefined;
