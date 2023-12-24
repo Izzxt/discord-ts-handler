@@ -1,4 +1,4 @@
-import { Events, Interaction } from "discord.js";
+import { Events, Interaction, codeBlock } from "discord.js";
 import { Response } from "src/types/types";
 import { Bot, ERROR_MESSAGE } from "../../client";
 import { Event } from "../../loaders/event";
@@ -20,7 +20,9 @@ export default class InteractionModal extends Event {
         try {
           await cmd.executeModalInteraction?.(bot, interaction, interaction.customId);
         } catch (error) {
-          if (error instanceof Error) logger.error(error);
+          if (error instanceof Error) {
+            logger.error(error)
+          };
         }
       }
     }

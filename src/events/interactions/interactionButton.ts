@@ -3,6 +3,7 @@ import { Response } from "src/types/types";
 import { Bot, ERROR_MESSAGE } from "../../client";
 import { Event } from "../../loaders/event";
 import { logger } from "src/utils/logger";
+import { codeBlock } from "@discordjs/builders";
 
 export default class InteractionButton extends Event {
   constructor() {
@@ -20,7 +21,9 @@ export default class InteractionButton extends Event {
         try {
           await cmd.executeButtonInteraction?.(bot, interaction, interaction.customId);
         } catch (error) {
-          if (error instanceof Error) logger.error(error);
+          if (error instanceof Error) {
+            logger.error(error)
+          };
         }
       }
     }

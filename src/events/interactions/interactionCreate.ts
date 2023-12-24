@@ -1,5 +1,5 @@
 import { Event } from "../../loaders/event";
-import { ApplicationCommandOptionType, Events, Interaction, InteractionResponse } from "discord.js";
+import { ApplicationCommandOptionType, Events, Interaction, InteractionResponse, codeBlock } from "discord.js";
 import { Bot, ERROR_MESSAGE } from "../../client";
 import { logger } from "src/utils/logger";
 
@@ -28,7 +28,9 @@ export default class InteractionCreate extends Event {
       try {
         await cmd.executeCommandInteraction?.(bot, interaction, ...args);
       } catch (error) {
-        if (error instanceof Error) logger.error(error);
+        if (error instanceof Error) {
+          logger.error(error)
+        };
       }
     }
   }
