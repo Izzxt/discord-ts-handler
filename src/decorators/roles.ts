@@ -31,8 +31,10 @@ export function RoleKey(keys: string[]) {
       const roleSetting = await prisma.role_settings.findMany();
       const [bot, interaction] = args as [Bot, InteractionType];
       const { member } = interaction;
-      const isHas = roleSetting.some(
-        (r) => keys.includes(r.key) && (member?.roles as GuildMemberRoleManager).cache.has(r.role_id)
+      const isHas = (member?.roles as GuildMemberRoleManager).cache.some((r) =>
+        roleSetting.some((role) => {
+          if (role.role_id === r.id) return keys.includes(role.key);
+        })
       );
       if (!isHas)
         return await interaction.reply({
