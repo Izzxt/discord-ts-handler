@@ -22,20 +22,20 @@ services:
       - mongo-network
     depends_on:
       - mongo1
-    command: ["bash", "-c", "sleep 3 && mongosh --host localhost:27017 --eval \"rs.initiate({_id: 'rs0', members: [{_id: 0, host: 'localhost:27017'}]})\""]
+    command: ["bash", "-c", "sleep 3 && mongosh --host mongo1:27017 --eval \"rs.initiate({_id: 'rs0', members: [{_id: 0, host: 'mongo1:27017'}]})\""]
     volumes:
       - "mongo1_data:/data/db"
       - "mongo1_config:/data/configdb"
-  ovs-discord-bot:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: ovs-discord-bot
-    restart: "always"
-    environment:
-      - .env
-    volumes:
-      - ./:/usr/src/app
+  # ovs-discord-bot:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: ovs-discord-bot
+  #   restart: "always"
+  #   environment:
+  #     - .env
+  #   volumes:
+  #     - ./:/usr/src/app
 
 volumes:
   mongo1_data:
