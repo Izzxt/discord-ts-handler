@@ -1,3 +1,5 @@
+import 'reflect-metadata';
+
 import { Bot } from "./client";
 import { TOKEN } from "./config";
 import { EventHandler } from "./loaders/events/handler";
