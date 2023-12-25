@@ -2,14 +2,14 @@
   "name": "discord-ts-handler",
   "version": "1.0.0",
   "main": "dist/Main.js",
-  "repository": "https://github.com/Izzxt/DiscordTS.git",
+  "repository": "https://github.com/Izzxt/discord-ts-handler.git",
   "author": "Izzat",
   "license": "MIT",
+  "type": "module",
   "private": true,
   "scripts": {
-    "start": "node dist/Main.js",
-    "start:build": "tsc ",
-    "start:dev": "ts-node-dev --respawn --transpile-only --poll src/main.ts"
+    "start": "bun run ./src/main.ts",
+    "start:dev": "bun run --watch ./src/main.ts"
   },
   "dependencies": {
     "@discordjs/builders": "^0.5.0",
@@ -30,8 +30,6 @@
     "prettier": "^3.1.1",
     "prisma": "^5.7.1",
     "reflect-metadata": "^0.2.1",
-    "ts-node": "^10.2.0",
-    "ts-node-dev": "^1.1.8",
     "typescript": "^4.3.5"
   }
 }

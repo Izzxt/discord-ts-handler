@@ -1,7 +1,5 @@
-import { CommandInteraction, Guild, GuildMemberRoleManager, PermissionsBitField } from "discord.js";
-import { prisma } from "prisma/client";
+import { GuildMemberRoleManager } from "discord.js";
 import { Bot } from "src/client";
-import { GUILDID } from "src/config";
 import { InteractionType } from "src/loaders/interaction";
 
 export function Role(roles: string[]) {
@@ -19,28 +17,6 @@ export function Role(roles: string[]) {
             ephemeral: true,
           });
       }
-      return await original.apply(this, args);
-    };
-  };
-}
-
-export function RoleKey(keys: string[]) {
-  return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-    const original = descriptor.value;
-    descriptor.value = async function (...args: any[]) {
-      const roleSetting = await prisma.role_settings.findMany();
-      const [bot, interaction] = args as [Bot, InteractionType];
-      const { member } = interaction;
-      const isHas = (member?.roles as GuildMemberRoleManager).cache.some((r) =>
-        roleSetting.some((role) => {
-          if (role.role_id === r.id) return keys.includes(role.key);
-        })
-      );
-      if (!isHas)
-        return await interaction.reply({
-          content: "You don't have permissions to use this interaction.",
-          ephemeral: true,
-        });
       return await original.apply(this, args);
     };
   };

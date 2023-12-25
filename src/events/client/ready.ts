@@ -11,7 +11,7 @@ export default class Ready extends Event {
 
   public async execute(bot: Bot): Promise<void> {
     try {
-      const rest = new REST({ version: "8" }).setToken(TOKEN);
+      const rest = new REST().setToken(TOKEN);
 
       logger.info(
         `Started refreshing ${bot.interactions.length} application (/) commands.`
