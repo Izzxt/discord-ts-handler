@@ -14,7 +14,7 @@ import {
   TextInputBuilder,
   TextInputStyle,
 } from "discord.js";
-import { ButtonId, Command, Inject, ModalId } from "src/common/decorators/decorators";
+import { ButtonId, Command, Inject, ModalId, RoleKey } from "src/common/decorators/decorators";
 import { Bot } from "../client";
 import { Interaction } from "../loaders/interaction";
 
@@ -26,6 +26,7 @@ export default class Test extends Interaction {
     });
   }
 
+  @RoleKey(["test"])
   @Command("test")
   public async executeCommandInteraction(
     bot: Bot,

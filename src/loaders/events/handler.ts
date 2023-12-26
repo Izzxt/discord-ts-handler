@@ -20,31 +20,3 @@ export class EventHandler {
     }
   }
 }
-
-export async function classInjectionInstance<T extends Interaction>(
-  bot: Bot,
-  interaction: T,
-  metadataKey?: string
-): Promise<InteractionResponse<boolean> | undefined> {
-  for (const [name, Instance] of classInjection.entries()) {
-    const has = classInjection.has(name);
-    if (!has) continue;
-    const instance = new Instance();
-    const methods = Object.getOwnPropertyNames(Instance.prototype).filter(
-      (method) => method !== "constructor"
-    );
-
-    for (const method of methods) {
-      const key = Reflect.getMetadata(metadataKey, instance, method);
-      if (typeof instance[method] === "function") {
-        if ("customId" in interaction && key === interaction.customId) {
-          await instance[method](bot, interaction);
-        }
-        if (interaction.isCommand() && key === interaction.commandName) {
-          await instance[method](bot, interaction);
-        }
-      }
-    }
-  }
-  return;
-}

@@ -1,9 +1,10 @@
 import {
   AnySelectMenuInteraction,
   CacheType,
-  ModalSubmitInteraction
+  ModalSubmitInteraction,
+  SlashCommandBuilder
 } from "discord.js";
-import { Inject, ModalId, SelectMenuId } from "src/common/decorators/decorators";
+import { Command, Inject, ModalId, RoleKey, SelectMenuId } from "src/common/decorators/decorators";
 import { Bot } from "../client";
 import { Interaction } from "../loaders/interaction";
 
@@ -11,8 +12,14 @@ import { Interaction } from "../loaders/interaction";
 export default class Test2 extends Interaction {
   constructor() {
     super({
-      data: undefined,
+      data: new SlashCommandBuilder().setName("test2").setDescription("Test something"),
     });
+  }
+
+  @RoleKey(["test"])
+  @Command("test2")
+  async testCommand(bot: Bot, interaction: AnySelectMenuInteraction<CacheType>) {
+    await interaction.reply({ content: `Test Command Clicked`, ephemeral: true });
   }
 
   @ModalId("test-modal")

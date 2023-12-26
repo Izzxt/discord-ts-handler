@@ -20,7 +20,7 @@ export default class MessageReactionAdd extends Event {
       }
     }
 
-    const emoji = bot.reactions.get(reaction.emoji.id || reaction.emoji.name);
+    const emoji = bot._reactions.get(reaction.emoji.id || reaction.emoji.name);
 
     if (!emoji) return;
 

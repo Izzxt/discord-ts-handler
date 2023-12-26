@@ -71,3 +71,12 @@ export function Command(name: string) {
     Reflect.defineMetadata(COMMAND_METADATA, name, target, propertyKey);
   };
 }
+
+export function RoleKey(keys: string[]) {
+  return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+    const original = descriptor.value;
+    descriptor.value = async function (...args: any[]) {
+      return await original.apply(this, args);
+    };
+  };
+}

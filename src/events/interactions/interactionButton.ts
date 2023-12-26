@@ -8,8 +8,8 @@ import { Response } from "src/types/types";
 import { logger } from "src/utils/logger";
 import { Bot } from "../../client";
 import { Event } from "../../loaders/event";
-import { classInjectionInstance } from "src/loaders/events/handler";
 import { buttonSet } from "src/common/decorators/decorators";
+import { classInjectionInstance } from "src/loaders/interactions/handler";
 
 export default class InteractionButton extends Event {
   constructor() {
@@ -17,11 +17,10 @@ export default class InteractionButton extends Event {
   }
 
   public async execute(bot: Bot, interaction: Interaction): Promise<Response> {
+    if (!interaction.isButton()) return;
     try {
-      if (interaction.isButton()) {
-        buttonSet.has(interaction.customId) &&
-          (await classInjectionInstance(bot, interaction, BUTTON_METADATA));
-      }
+      buttonSet.has(interaction.customId) &&
+        (await classInjectionInstance(bot, interaction, BUTTON_METADATA, bot._object));
     } catch (error) {
       logger.error(error);
     }

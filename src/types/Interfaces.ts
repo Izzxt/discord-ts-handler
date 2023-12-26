@@ -2,7 +2,7 @@ import { ClientEvents, PermissionsBitField, Role, SlashCommandBuilder, SlashComm
 import { InteractionHandler } from "../loaders/interactions/handler";
 
 export interface IClient {
-    interactionHandler: InteractionHandler;
+    _interactionHandler: InteractionHandler;
 }
 
 export interface IEvent {
