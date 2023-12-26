@@ -1,42 +1,28 @@
 import { glob } from "glob";
 import { Bot } from "../../client";
 import { Interaction } from "../interaction";
+import { classInjection } from "src/common/constants/constants";
 
 export class InteractionHandler {
-    public async load(bot: Bot) {
-        let interactions = glob.sync("./src/interactions/**/*{.ts,.js}");
+  public async load(bot: Bot) {
+    let interactions = glob.sync("./src/interactions/**/*{.ts,.js}");
 
-        for (const file of interactions) {
-            const Interaction: any = await require(file).default;
-            const interaction: Interaction = new Interaction();
+    for (const file of interactions) {
+      const Interaction: any = await require(file).default;
+      const interaction: Interaction = new Interaction();
 
-            if (interaction.interactionOpt.buttonIds !== undefined) {
-                for (const buttonId of interaction.interactionOpt.buttonIds) {
-                    bot.buttons.set(buttonId, interaction);
-                }
-            }
+      const inject = classInjection.get(interaction.constructor.name);
+      if (inject === undefined) continue;
 
-            if (interaction.interactionOpt.menuIds !== undefined) {
-                for (const menuName of interaction.interactionOpt.menuIds) {
-                    bot.menus.set(menuName, interaction);
-                }
-            }
-
-            if (interaction.interactionOpt.reactionIds !== undefined) {
-                for (const reaction of interaction.interactionOpt.reactionIds) {
-                    bot.reactions.set(reaction, interaction);
-                }
-            }
-
-            if (interaction.interactionOpt.modalIds !== undefined) {
-                for (const reaction of interaction.interactionOpt.modalIds) {
-                    bot.modals.set(reaction, interaction);
-                }
-            }
-
-            if (interaction.interactionOpt.data === undefined) continue;
-            bot.interaction.set(interaction.interactionOpt.data.name, interaction);
-            bot.interactions.push(interaction.interactionOpt.data);
+      if (interaction.interactionOpt.reactionIds !== undefined) {
+        for (const reaction of interaction.interactionOpt.reactionIds) {
+          bot.reactions.set(reaction, interaction);
         }
+      }
+
+      if (interaction.interactionOpt.data === undefined) continue;
+      bot.interaction.set(interaction.interactionOpt.data.name, interaction);
+      bot.interactions.push(interaction.interactionOpt.data);
     }
+  }
 }

@@ -1,8 +1,10 @@
-import { Events, Interaction, codeBlock } from "discord.js";
+import { Events, Interaction } from "discord.js";
+import { SELECT_MENU_METADATA } from "src/common/constants/constants";
 import { Response } from "src/types/types";
-import { Bot, ERROR_MESSAGE } from "../../client";
-import { Event } from "../../loaders/event";
 import { logger } from "src/utils/logger";
+import { Bot } from "../../client";
+import { Event } from "../../loaders/event";
+import { classInjectionInstance } from "src/loaders/events/handler";
 
 export default class InteractionSelectMenu extends Event {
   constructor() {
@@ -10,21 +12,13 @@ export default class InteractionSelectMenu extends Event {
   }
 
   public async execute(bot: Bot, interaction: Interaction): Promise<Response> {
-    if (interaction.isAnySelectMenu()) {
-      const cmd = bot.menus.get(interaction.customId);
-      if (!cmd) return await interaction.reply({ content: ERROR_MESSAGE, ephemeral: true });
-
-      if (cmd.interactionOpt.menuIds === undefined) return await interaction.reply({ content: ERROR_MESSAGE, ephemeral: true });
-
-      if (cmd.interactionOpt.menuIds.includes(interaction.customId)) {
-        try {
-          await cmd.executeSelectMenuInteraction?.(bot, interaction, interaction.customId);
-        } catch (error) {
-          if (error instanceof Error) {
-            logger.error(error)
-          };
-        }
-      }
+    try {
+      if (interaction.isAnySelectMenu())
+        await classInjectionInstance(bot, interaction, SELECT_MENU_METADATA);
+    } catch (error) {
+      if (error instanceof Error) {
+        logger.error(error)
+      };
     }
   }
 }
