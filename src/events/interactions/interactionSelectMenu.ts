@@ -5,6 +5,7 @@ import { logger } from "src/utils/logger";
 import { Bot } from "../../client";
 import { Event } from "../../loaders/event";
 import { classInjectionInstance } from "src/loaders/events/handler";
+import { selectMenuSet } from "src/common/decorators/decorators";
 
 export default class InteractionSelectMenu extends Event {
   constructor() {
@@ -14,7 +15,8 @@ export default class InteractionSelectMenu extends Event {
   public async execute(bot: Bot, interaction: Interaction): Promise<Response> {
     try {
       if (interaction.isAnySelectMenu())
-        await classInjectionInstance(bot, interaction, SELECT_MENU_METADATA);
+        selectMenuSet.has(interaction.customId) &&
+          await classInjectionInstance(bot, interaction, SELECT_MENU_METADATA);
     } catch (error) {
       if (error instanceof Error) {
         logger.error(error)

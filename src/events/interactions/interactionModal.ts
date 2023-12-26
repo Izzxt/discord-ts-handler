@@ -5,6 +5,7 @@ import { logger } from "src/utils/logger";
 import { Bot } from "../../client";
 import { Event } from "../../loaders/event";
 import { classInjectionInstance } from "src/loaders/events/handler";
+import { modalSet } from "src/common/decorators/decorators";
 
 export default class InteractionModal extends Event {
   constructor() {
@@ -14,7 +15,8 @@ export default class InteractionModal extends Event {
   public async execute(bot: Bot, interaction: Interaction): Promise<Response> {
     try {
       if (interaction.isModalSubmit())
-        await classInjectionInstance(bot, interaction, MODAL_METADATA);
+        modalSet.has(interaction.customId) &&
+          await classInjectionInstance(bot, interaction, MODAL_METADATA);
     } catch (error) {
       if (error instanceof Error) {
         logger.error(error)

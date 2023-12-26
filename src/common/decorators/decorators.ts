@@ -28,26 +28,46 @@ export function Inject(constructor: Function) {
   Reflect.defineMetadata(INJECT_METADATA, constructor.name, constructor);
 }
 
+export const buttonSet = new Set<string>();
 export function ButtonId(key?: string) {
   return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+    if (buttonSet.has(key as string)) {
+      throw new Error(`ButtonId ${key} already exists`);
+    }
+    buttonSet.add(key as string);
     Reflect.defineMetadata(BUTTON_METADATA, key, target, propertyKey);
   };
 }
 
+export const modalSet = new Set<string>();
 export function ModalId(key?: string) {
   return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+    if (modalSet.has(key as string)) {
+      throw new Error(`ModalId ${key} already exists`);
+    }
+    modalSet.add(key as string);
     Reflect.defineMetadata(MODAL_METADATA, key, target, propertyKey);
   };
 }
 
+export const selectMenuSet = new Set<string>();
 export function SelectMenuId(key?: string) {
   return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+    if (selectMenuSet.has(key as string)) {
+      throw new Error(`SelectMenuId ${key} already exists`);
+    }
+    selectMenuSet.add(key as string);
     Reflect.defineMetadata(SELECT_MENU_METADATA, key, target, propertyKey);
   };
 }
 
+export const commandSet = new Set<string>();
 export function Command(name: string) {
   return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+    if (commandSet.has(name)) {
+      throw new Error(`Command ${name} already exists`);
+    }
+    commandSet.add(name);
     Reflect.defineMetadata(COMMAND_METADATA, name, target, propertyKey);
   };
 }
