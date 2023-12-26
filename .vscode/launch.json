@@ -21,8 +21,11 @@
       "name": "Run File",
       "program": "./src/main.ts",
       "cwd": "${workspaceFolder}",
-      "noDebug": true,
-      "watchMode": false
+      "noDebug": false,
+      "watchMode": true,
+      "args": [
+        "--inspect-brk"
+      ]
     },
     {
       "type": "bun",
