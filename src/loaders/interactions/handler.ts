@@ -2,7 +2,10 @@ import { glob } from "glob";
 import { Bot } from "../../client";
 import { Interaction } from "../interaction";
 import { classInjection } from "src/common/constants/constants";
-import { InteractionResponse, Interaction as DiscordInteraction } from "discord.js";
+import {
+  InteractionResponse,
+  Interaction as DiscordInteraction,
+} from "discord.js";
 import { HandlerObject } from "./handlerObject";
 
 export class InteractionHandler {
@@ -50,6 +53,8 @@ export async function classInjectionInstance<T extends DiscordInteraction>(
           await instance[method](bot, interaction);
         }
         if (interaction.isCommand() && key === interaction.commandName) {
+          await instance[method](bot, interaction);
+        } else if (interaction.isAutocomplete() && key === interaction.commandName) {
           await instance[method](bot, interaction);
         }
       }

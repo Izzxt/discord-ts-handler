@@ -1,7 +1,7 @@
 import { GuildMemberRoleManager } from "discord.js";
 import { Bot } from "src/client";
 import { InteractionType } from "src/loaders/interaction";
-import { BUTTON_METADATA, COMMAND_METADATA, INJECT_METADATA, MODAL_METADATA, SELECT_MENU_METADATA, classInjection } from "../constants/constants";
+import { AUTO_COMPLETE_METADATA, BUTTON_METADATA, COMMAND_METADATA, INJECT_METADATA, MODAL_METADATA, SELECT_MENU_METADATA, classInjection } from "../constants/constants";
 
 export function Role(roles: string[]) {
   return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
@@ -47,6 +47,17 @@ export function ModalId(key?: string) {
     }
     modalSet.add(key as string);
     Reflect.defineMetadata(MODAL_METADATA, key, target, propertyKey);
+  };
+}
+
+export const autoCompleteId = new Set<string>();
+export function AutoCompleteId(key?: string) {
+  return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+    if (autoCompleteId.has(key as string)) {
+      throw new Error(`AutoCompleteId ${key} already exists`);
+    }
+    autoCompleteId.add(key as string);
+    Reflect.defineMetadata(AUTO_COMPLETE_METADATA, key, target, propertyKey);
   };
 }
 
